@@ -55,6 +55,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.2s;
             border: 2px solid var(--toca-green);
+            cursor: pointer;
         }
         .bird-card:hover {
             transform: translateY(-5px);
@@ -91,25 +92,80 @@
         <h1>Aves da Cachoeira da Toca</h1>
         <p>Conheça as espécies mais comuns em nossa fazenda</p>
     </div>
-    <div class="bird-grid" id="birds">
-        ${birds.map(bird => `
-        <div class="bird-card" onclick="toggleInfo(this)">
-            <h3>${bird.name}</h3>
-            <div class="bird-info">
-                <p class="feeding-habits">
-                    <strong>Alimentação:</strong> ${bird.feeding}
-                </p>
-            </div>
-        </div>
-        `).join('')}
-    </div>
+    <div class="bird-grid" id="birds"></div>
 
     <script>
         const birds = [
-            ${birdData.map(bird => `{
-                name: "${bird.name}",
-                feeding: "${bird.feeding}"
-            }`).join(',\n            ')}
+            { name: "Sai tucano/ saí verde", feeding: "Frutas" },
+            { name: "Sai azul", feeding: "Frutas" },
+            { name: "Saíra 7 cores", feeding: "Frutas" },
+            { name: "Capitão de saíra", feeding: "Frutas, insetos e anfíbios" },
+            { name: "Saíra de lenço/saíra militar", feeding: "Frutas" },
+            { name: "Sanhaço do coqueiro", feeding: "Frutas, sementes, insetos, larvas" },
+            { name: "Sanhaço do encontro amarelo", feeding: "Fruta , sementes, insetos, larvas" },
+            { name: "Sanhaço de encontro azul", feeding: "Frutas, sementes, insetos, larvas" },
+            { name: "Sanhaço cinzento", feeding: "Frutas, sementes, insetos, larvas" },
+            { name: "Ferro Velho", feeding: "Frutas e insetos" },
+            { name: "Tiê sangue", feeding: "Frutas e insetos" },
+            { name: "Tiê preto", feeding: "Frutas e insetos" },
+            { name: "Tiê de bando", feeding: "Frutas e insetos" },
+            { name: "Tiê de topete", feeding: "Frutas e insetos" },
+            { name: "Catirumbava", feeding: "Frutas e insetos" },
+            { name: "Sabiá laranjeira", feeding: "Frutas, insetos e minhocas" },
+            { name: "Sabiá una", feeding: "Frutas, insetos e minhocas" },
+            { name: "Sabiá coleira", feeding: "Frutas e formigas" },
+            { name: "Sabiá poca", feeding: "Frutas e insetos" },
+            { name: "Sabiá barranco", feeding: "Frutas, minhocas e artrópodes" },
+            { name: "Tangará", feeding: "Frutas e artrópodes" },
+            { name: "Gaturamo", feeding: "Frutas" },
+            { name: "Alma de gato", feeding: "Lagartas, ovos, pererecas" },
+            { name: "Surucuá vermelho/variado", feeding: "Frutas" },
+            { name: "Surucuá amarelo", feeding: "Frutas" },
+            { name: "Tiriba testa vermelha", feeding: "Frutas" },
+            { name: "Periquito rico", feeding: "Frutas" },
+            { name: "Papagaio moleiro", feeding: "Frutas" },
+            { name: "Canário da terra", feeding: "Sementes" },
+            { name: "Bico de lacre", feeding: "Sementes" },
+            { name: "Bem te vi", feeding: "Insetos" },
+            { name: "Bem te vi pirata", feeding: "Frutas" },
+            { name: "Bentevizinho penacho vermelho", feeding: "Insetos" },
+            { name: "Suiriri", feeding: "Insetos" },
+            { name: "Cambacica", feeding: "Néctar, frutas e artrópodes" },
+            { name: "Viuvinha/Lavadeira mascarada", feeding: "Pequenos artrópodes" },
+            { name: "Tico tico", feeding: "Sementes, frutas e insetos" },
+            { name: "Chorozinho asa vermelha", feeding: "Insetos" },
+            { name: "Pica pau rei", feeding: "Insetos, larvas, frutos e sementes" },
+            { name: "João velho", feeding: "Insetos e frutas" },
+            { name: "Pica pau benedito", feeding: "Frutas" },
+            { name: "Arapaçu verde", feeding: "Insetos e larvas" },
+            { name: "Martim pescador", feeding: "Peixes e crustáceos" },
+            { name: "Macuco", feeding: "Sementes" },
+            { name: "Jacutinga", feeding: "Frutas" },
+            { name: "Socó boi", feeding: "Anfíbios, répteis e insetos" },
+            { name: "Rolinha", feeding: "Sementes" },
+            { name: "Juriti", feeding: "Sementes" },
+            { name: "Pomba trocal", feeding: "Frutas e sementes" },
+            { name: "Pomba amargosa", feeding: "Frutas e sementes" },
+            { name: "Araponga", feeding: "Frutas de palmeiras" },
+            { name: "Juruviara", feeding: "Insetos, fruta da embaúba" },
+            { name: "Pitiguari", feeding: "Insetos e larvas" },
+            { name: "Corruíra", feeding: "Insetos e larvas" },
+            { name: "Pula-pula", feeding: "Insetos" },
+            { name: "Carcará", feeding: "Onívoro" },
+            { name: "Gavião carijó", feeding: "Aves, répteis e pequenos mamíferos" },
+            { name: "Gavião asa de telha", feeding: "Pequenos vertebrados" },
+            { name: "Gavião bombachinha grande", feeding: "Insetos e pássaros pequenos" },
+            { name: "Beija flor rajado", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor balança rabo do bico torto", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor fronte violeta", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor rubi", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor cinza", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor preto", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor tesoura", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor de frente preta", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Beija flor topetinho verde", feeding: "Néctar e pequenos artrópodes" },
+            { name: "Araçari poca", feeding: "Frutas" },
+            { name: "Tucano bico verde", feeding: "Frutas, ovos e filhotes no ninho" }
         ];
 
         function toggleInfo(card) {
