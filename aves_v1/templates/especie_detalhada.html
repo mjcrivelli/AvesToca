@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ especie[1] }}</h1>
+<p>{{ especie[2] }}</p>
+<img src="{{ url_for('send_image', filename=especie[4]) }}" alt="{{ especie[1] }}" width="300">
+{% endblock %}

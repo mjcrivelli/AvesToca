@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lista de Espécies</h1>
+<ul>
+    <head>
+        <meta charset="UTF-8">
+        <title>Aves da Cachoeira da Toca</title>
+        <style>
+            :root {
+                --toca-blue: #42B4E6;
+                --toca-green: #2D8E43;
+                --toca-yellow: #FFE600;
+                --toca-dark: #333;
+            }
+            body {
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                margin: 0;
+                background-color: #f5f5f5;
+            }
+            nav {
+                background: var(--toca-green);
+                padding: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            nav ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .header {
+                text-align: center;
+                padding: 40px 20px;
+                background: var(--toca-blue);
+                color: white;
+            }
+            .bird-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+                padding: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .bird-card {
+                background: white;
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+                border: 2px solid var(--toca-green);
+                cursor: pointer;
+            }
+            .bird-card:hover {
+                transform: translateY(-5px);
+            }
+            .bird-card h3 {
+                color: var(--toca-green);
+                margin: 10px 0;
+            }
+            .bird-info {
+                display: none;
+                margin-top: 15px;
+                padding: 15px;
+                background: #f9f9f9;
+                border-radius: 8px;
+            }
+            .bird-info.active {
+                display: block;
+            }
+            .feeding-habits {
+                color: var(--toca-dark);
+                font-size: 0.9em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Aves da Cachoeira da Toca</h1>
+            <p>Conheça as espécies mais comuns em nossa fazenda</p>
+        </div>
+        <div class="bird-grid" id="birds"></div>
+    
+        <script>
+            const birds = [
+                { name: "Sai tucano/ saí verde", feeding: "Frutas" },
+                { name: "Sai azul", feeding: "Frutas" },
+                { name: "Saíra 7 cores", feeding: "Frutas" },
+                { name: "Capitão de saíra", feeding: "Frutas, insetos e anfíbios" },
+                { name: "Saíra de lenço/saíra militar", feeding: "Frutas" },
+                { name: "Sanhaço do coqueiro", feeding: "Frutas, sementes, insetos, larvas" },
+                { name: "Sanhaço do encontro amarelo", feeding: "Fruta , sementes, insetos, larvas" },
+                { name: "Sanhaço de encontro azul", feeding: "Frutas, sementes, insetos, larvas" },
+                { name: "Sanhaço cinzento", feeding: "Frutas, sementes, insetos, larvas" },
+                { name: "Ferro Velho", feeding: "Frutas e insetos" },
+                { name: "Tiê sangue", feeding: "Frutas e insetos" },
+                { name: "Tiê preto", feeding: "Frutas e insetos" },
+                { name: "Tiê de bando", feeding: "Frutas e insetos" },
+                { name: "Tiê de topete", feeding: "Frutas e insetos" },
+                { name: "Catirumbava", feeding: "Frutas e insetos" },
+                { name: "Sabiá laranjeira", feeding: "Frutas, insetos e minhocas" },
+                { name: "Sabiá una", feeding: "Frutas, insetos e minhocas" },
+                { name: "Sabiá coleira", feeding: "Frutas e formigas" },
+                { name: "Sabiá poca", feeding: "Frutas e insetos" },
+                { name: "Sabiá barranco", feeding: "Frutas, minhocas e artrópodes" },
+                { name: "Tangará", feeding: "Frutas e artrópodes" },
+                { name: "Gaturamo", feeding: "Frutas" },
+                { name: "Alma de gato", feeding: "Lagartas, ovos, pererecas" },
+                { name: "Surucuá vermelho/variado", feeding: "Frutas" },
+                { name: "Surucuá amarelo", feeding: "Frutas" },
+                { name: "Tiriba testa vermelha", feeding: "Frutas" },
+                { name: "Periquito rico", feeding: "Frutas" },
+                { name: "Papagaio moleiro", feeding: "Frutas" },
+                { name: "Canário da terra", feeding: "Sementes" },
+                { name: "Bico de lacre", feeding: "Sementes" },
+                { name: "Bem te vi", feeding: "Insetos" },
+                { name: "Bem te vi pirata", feeding: "Frutas" },
+                { name: "Bentevizinho penacho vermelho", feeding: "Insetos" },
+                { name: "Suiriri", feeding: "Insetos" },
+                { name: "Cambacica", feeding: "Néctar, frutas e artrópodes" },
+                { name: "Viuvinha/Lavadeira mascarada", feeding: "Pequenos artrópodes" },
+                { name: "Tico tico", feeding: "Sementes, frutas e insetos" },
+                { name: "Chorozinho asa vermelha", feeding: "Insetos" },
+                { name: "Pica pau rei", feeding: "Insetos, larvas, frutos e sementes" },
+                { name: "João velho", feeding: "Insetos e frutas" },
+                { name: "Pica pau benedito", feeding: "Frutas" },
+                { name: "Arapaçu verde", feeding: "Insetos e larvas" },
+                { name: "Martim pescador", feeding: "Peixes e crustáceos" },
+                { name: "Macuco", feeding: "Sementes" },
+                { name: "Jacutinga", feeding: "Frutas" },
+                { name: "Socó boi", feeding: "Anfíbios, répteis e insetos" },
+                { name: "Rolinha", feeding: "Sementes" },
+                { name: "Juriti", feeding: "Sementes" },
+                { name: "Pomba trocal", feeding: "Frutas e sementes" },
+                { name: "Pomba amargosa", feeding: "Frutas e sementes" },
+                { name: "Araponga", feeding: "Frutas de palmeiras" },
+                { name: "Juruviara", feeding: "Insetos, fruta da embaúba" },
+                { name: "Pitiguari", feeding: "Insetos e larvas" },
+                { name: "Corruíra", feeding: "Insetos e larvas" },
+                { name: "Pula-pula", feeding: "Insetos" },
+                { name: "Carcará", feeding: "Onívoro" },
+                { name: "Gavião carijó", feeding: "Aves, répteis e pequenos mamíferos" },
+                { name: "Gavião asa de telha", feeding: "Pequenos vertebrados" },
+                { name: "Gavião bombachinha grande", feeding: "Insetos e pássaros pequenos" },
+                { name: "Beija flor rajado", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor balança rabo do bico torto", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor fronte violeta", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor rubi", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor cinza", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor preto", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor tesoura", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor de frente preta", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Beija flor topetinho verde", feeding: "Néctar e pequenos artrópodes" },
+                { name: "Araçari poca", feeding: "Frutas" },
+                { name: "Tucano bico verde", feeding: "Frutas, ovos e filhotes no ninho" }
+            ];
+    
+            function toggleInfo(card) {
+                const info = card.querySelector('.bird-info');
+                info.classList.toggle('active');
+            }
+    
+            function renderBirds() {
+                const grid = document.querySelector('.bird-grid');
+                grid.innerHTML = birds.map(bird => `
+                    <div class="bird-card" onclick="toggleInfo(this)">
+                        <h3>${bird.name}</h3>
+                        <div class="bird-info">
+                            <p class="feeding-habits">
+                                <strong>Alimentação:</strong> ${bird.feeding}
+                            </p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+    
+            renderBirds();
+        </script>
+    </body>
+</ul>
+{% endblock %}

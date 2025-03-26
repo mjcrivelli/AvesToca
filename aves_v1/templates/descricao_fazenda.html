@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --toca-blue: #42B4E6;
+        --toca-green: #2D8E43;
+        --toca-yellow: #FFE600;
+        --toca-dark: #333;
+    }
+    body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        margin: 0;
+        background-color: #f5f5f5;
+    }
+    nav {
+        background: var(--toca-green);
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .header {
+        text-align: center;
+        padding: 40px 20px;
+        background: var(--toca-blue);
+        color: white;
+    }
+    .bird-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .bird-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        border: 2px solid var(--toca-green);
+        cursor: pointer;
+    }
+    .bird-card:hover {
+        transform: translateY(-5px);
+    }
+    .bird-card h3 {
+        color: var(--toca-green);
+        margin: 10px 0;
+    }
+    .bird-info {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 8px;
+    }
+    .bird-info.active {
+        display: block;
+    }
+    .feeding-habits {
+        color: var(--toca-dark);
+        font-size: 0.9em;
+    }
+</style>
+<h1>Bem-vindo à Fazenda!</h1>
+<p>Bem-vindo à nossa fazenda, onde você pode conhecer diversas espécies de aves incríveis!</p>
+{% endblock %}
