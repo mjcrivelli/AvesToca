@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p></p>
+<h1>{% block title %} Adicionando nova ave {% endblock %}</h1>
+
+<!-- Formulário para adicionar nova ave -->
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="nome">Nome comum</label>
+        <input type="text" name="nome" placeholder="Nome comum" class="form-control" value="{{ request.form['nome'] }}">
+    </div>
+
+    <div class="form-group">
+        <label for="nome_cientifico">Nome científico</label>
+        <input type="text" name="nome_cientifico" placeholder="Nome científico" class="form-control" value="{{ request.form['nome_cientifico'] }}">
+    </div>
+
+    <div class="form-group">
+        <label for="descricao">Descrição da espécie</label>
+        <textarea name="descricao" placeholder="Descrição da espécie" class="form-control">{{ request.form['descricao'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="dimorfismo">A espécie possui dimorfismo sexual (diferença física entre machos e fêmeas da mesma espécie)?</label>
+        <textarea name="dimorfismo" placeholder="Sim ou Não " class="form-control">{{ request.form['dimorfismo'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ocorrencia">Quais meses de avistamento da espécie?</label>
+        <textarea name="ocorrencia" placeholder="Digite os meses de avistamento" class="form-control">{{ request.form['ocorrencia'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="conservacao">Qual estado de conservação da espécie?</label>
+        <textarea name="conservacao" placeholder="Conforme lista vermelha IUCN: Pouco Preocupante, Quase ameaçada, Vulnerável, Em Perigo, Em Perigo Crítico, Extinto na Natureza ou Extinto" class="form-control">{{ request.form['conservacao'] }}</textarea>
+    </div>
+
+        <div class="form-group">
+        <label for="imagem">Imagem</label>
+        <input type="file" name="imagem" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+</form>
+
+{% endblock %}
+

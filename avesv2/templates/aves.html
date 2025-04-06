@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="header">
+        <h2>{{ ave.nome }}</h2>
+    </div>
+    <div class="container">
+        <div class="bird-card">
+            <img src="{{ ave.imagem }}" alt="{{ ave.nome }}" class="bird-image">
+            <h3>{{ ave.nome_cientifico }}</h3>
+            <p class="bird-description">{{ ave.descricao }}</p>
+        </div>
+    </div>
+{% endblock %}
+

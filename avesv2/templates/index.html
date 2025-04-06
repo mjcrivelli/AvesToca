@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="header">
+        <h1>{% block title %}Aves da Fazenda Toca{% endblock %}</h1>
+        <p>Conheça as aves que habitam nossa Fazenda</p>
+    </div>
+
+    <div class="bird-grid">
+        {% for ave in aves %}
+            <div class="bird-card">
+                <h3>{{ ave.nome }}</h3>
+                <img src="{{ ave.imagem }}" alt="{{ ave.nome }}" class="bird-image">
+                <p></p>
+                <h6><strong>Descrição da espécie:</strong></h6>
+                <p class="bird-description">{{ ave.descricao }}</p>
+                <h6><strong>Dimorfismo sexual (diferença física entre machos e fêmeas da mesma espécie):</strong> </h6>
+                <p class="bird-dimorfismo">{{ ave.dimorfismo }}</p>
+                <h6><strong>Estado de conservação da espécie (Conforme lista vermelha IUCN):</strong></h6>
+                <p class="bird-conservacao">{{ ave.conservacao }}</p>
+                <h6><strong>Meses com possbilidade de avistar a espécie:</strong></h6>
+                <p class="bird-ocorrencia">{{ ave.ocorrencia }}</p>
+
+            </div>
+        {% endfor %}
+    </div>
+    <p>Fonte das informações: WikiAves. Disponível em: <a href="https://www.wikiaves.com.br/">https://www.wikiaves.com.br/</a>. Acesso em: 6 abr. 2025.</p>
+
+{% endblock %}
+
+
